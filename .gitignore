@@ -1,0 +1,12 @@
+# Mac system files
+.DS_Store/*
+
+# Python compilation Artifacts
+__pycache__/
+*.pyc
+.ipynb_checkpoints/*
+
+# Training Images
+data/train/*
+data/validation/*
+data/sample_evaluation_data/*
