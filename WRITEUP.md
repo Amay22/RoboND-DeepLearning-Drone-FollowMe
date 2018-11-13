@@ -159,16 +159,19 @@ final_score = average_IoU * (n_true_positive/(n_true_positive + n_false_positive
 Scores for while the quad is following behind the target.
 
 iou1o - average intersection over union for other people
+
 iou1t - average intersection over union for the target
 
 Scores for images while the quad is on patrol and the target is not visible
 
 iou2o - average intersection over union for other people
+
 iou2t - average intersection over union for the target
 
 This score measures how well the neural network can detect the target from far away
 
 iou3o - average intersection over union for other people
+
 iou3t - average intersection over union for the target
 
 finalIOU - IoU for the subset of dataset that definitely includes the hero
