@@ -75,13 +75,13 @@ The figure below shows the architecture of the FCN implemented for this model:
 
 ##### Model Hyperparameters
 
-###### Optimizer Algorithm
+##### Optimizer Algorithm
 
 I used the Adam Optimizer for a 1 trials with a small learning rate of 0.002 suggested in the lessons. A high learning rate might overshoot the desired output. I tried out the Nadam Optimizer which is an Adam Optimizer with  Nesterov Accelerated radient (NAG). NAG slows down momentum by using expected future position of the parameters. Momentum makes it converge more quickly and actually increased the score from about 0.36 to 0.43 with no other changes.
 
 Both the Adam and Nadam algorithms are Adaptive Gradient Algorithms as they maintain a per-parameter learning rate. This improves performance on problems with sparse gradients like this one. Also both Adam and Nadam relies on Root Mean Square Propagation (RMSProp), which also maintains per-parameter learning rates, adapted based on the average of recent magnitudes of the gradients for the weight.
 
-###### Learning Rate
+##### Learning Rate
 
 An optimal learning rate is important for fast and stable convergence.
 
@@ -93,12 +93,12 @@ Issue with a higher learning rate is that it will cause instabilities.
 
 I thought about using a higher learning rate but then I didn't want to spend a lot of training my algo again if I didn't get a good model out of it. So, I went with 0.02 for both Adam and Nadam optimizers which was suggested in the lessons and in slack. I didn't think about changing it at all.
 
-###### Batch Size
+##### Batch Size
 
 Evaluating the​ ​ gradient​  of ​the​ ​entire​ ​dataset​ ​in one go very expensive​, memory consuming, slow and pragmatically speaking infeasible.​ ​So, we break it all down into batches, all distributed systems work like this. In order to be able to use all samples, the number of steps needed is inversely proportional to the step size. Therefore, there is an optimal batch size to be used for efficient training of the network. Optimizing​ ​ the​ ​exact​​ size​ of​ the​ ​mini-batch​ ​you​ ​should​ ​use​ ​is​ generally​ ​left​ ​to​ ​trial​ ​and​ ​error. My go to batch size is around 30 to 50, so I started off with 30 and it took a whole of time and didn't even work. When using a larger batch size there is a significant degradation  in the quality of the model, as measured by its ability to generalize. The lack of generalization ability is due to the fact that large-batch​ methods​ ​tend​ ​to​ ​converge​ ​to​ ​ sharp​ ​minimizers​. Hence, I didn't want to increase it a whole lot so I went with 40.
 
 
-###### Number of epochs
+##### Number of epochs
 
 This refers to the number of times the algorithm sees the entire data set.
 
@@ -114,15 +114,15 @@ herefore, there's an optimal value for number of epochs. I tried 30 epochs with 
 
 The best result was with number of epochs = 40.
 
-###### Steps per epoch
+##### Steps per epoch
 
 In order to be able to use all training data available, steps per epoch is simply the size of the training dataset divided by batch size. Hence, number of training images = 4131 and batch size = 40 and 4131/40 gives us 104. So, the steps per epoch = 104.
 
-###### Validation steps per epoch
+##### Validation steps per epoch
 
 In order to be able to use all validation data available, validation steps per epoch is simply the size of the validation dataset divided by batch size. Hence, number of validation images = 1184 and batch size = 40 and 4131/40 gives us 30. So, the Validation steps per epoch = 30.
 
-###### Number of workers
+##### Number of workers
 
 This is the number of of workers or as we call it threads that will be processsed simultaneously in a multi-threaded environemnt. I just went with 10. I thought about using 16 but when I increased it from 2 to 10 I didn't see a whole lot of difference.
 
@@ -131,7 +131,7 @@ This is the number of of workers or as we call it threads that will be processse
 
 I went with what I had read in the lessons and a little bit of slack discussions but it was mainly brute force. The table below shows 2 experiments that were run with different values of hyperparameters.
 
-###### Scoring and Runs
+##### Scoring and Runs
 
 We need to score the network for accuracy. The code for scoring has already been provided. It is done via Intersection over union which is a useful metric for semantic segmentation tasks.
 
@@ -176,7 +176,7 @@ finalIOU - IoU for the subset of dataset that definitely includes the hero
 
 #### 6. Limitations and Future Work.
 
-###### Model accuracy
+##### Model accuracy
 
 The best overall score obtained in the above experiments was 0.43 which qualifies for this project but it can still be improved. Improving any FCN and Deep Learning algorithm can be done by following certain steps:
 
@@ -185,6 +185,6 @@ The best overall score obtained in the above experiments was 0.43 which qualifie
 3. More Layers in FCN: I only experimented with 3 encoding and 3 decoding layers I am sure if we add more hidden layers we can obtain better accuracy could be obtained without overfitting.
 
 
-###### Model Enhancement and Future Work
+##### Model Enhancement and Future Work
 
 We are following a single target but it'll be really cool to switch targets. If you have seen the TV show Colony you'll see that the aliens have sent drones to earth and they are all focussed on keeping the fascist kind of law and order. I am not suggesting anything of that sort but imagine a playgroup with small children who need constant care and the drone could monitor the children and alert the adults if the kid falls down or something. Same could be used for a pet.
